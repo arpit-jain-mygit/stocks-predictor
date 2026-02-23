@@ -472,70 +472,97 @@ Edge Cases:
 
 ## Backlog
 
+Status values:
+- `Planned`
+- `In Progress`
+- `Blocked`
+- `Completed (Code)`
+- `Completed (Tested)`
+
+Test values:
+- `Not Run`
+- `Unit Tested`
+- `Integration Tested`
+- `Backtested`
+- `Local Verified`
+- `UAT Verified`
+
+## How to use
+- Update `Status` when work starts/completes.
+- Update `Test` only after evidence exists (unit/integration/backtest/UAT as applicable).
+- Keep `Repo Scope` explicit: `Web`, `API`, `ML`, `Data`, `Infra`, `Docs`, or combinations.
+- Update `Change Summary` with concise implementation notes and commit IDs when completed.
+- For model-affecting items, include calibration/backtest evidence before marking `Completed (Tested)`.
+
 ## Prioritization Scheme
 - `P0` = critical for MVP path
 - `P1` = important, near-term
 - `P2` = useful enhancement
 
+## Backlog Master Table
+
+| ID | Priority | Phase | Task | Feature | Stories | Repo Scope | User Benefit | Status | Test | Change Summary |
+|---|---|---|---|---|---|---|---|---|---|---|
+| STK-001 | P0 | 0 | Define MVP stock universe (NIFTY 50 vs curated liquid list) | <a href="#f1">F-01</a> | <a href="#s-a1">S-A1</a> | Docs, Data, Product | Predictable symbol coverage and cleaner user search experience | Planned | Not Run | — |
+| STK-002 | P0 | 0 | Finalize `/predict_gtt` prediction response contract | <a href="#f3">F-03</a>, <a href="#f4">F-04</a>, <a href="#f5">F-05</a> | <a href="#s-a3">S-A3</a>, <a href="#s-a4">S-A4</a>, <a href="#s-a5">S-A5</a> | API, Docs, Product | Stable API contract for UI and model integration | Planned | Not Run | — |
+| STK-003 | P0 | 0 | Define label generation logic for target-hit and days-to-hit | <a href="#f4">F-04</a> | <a href="#s-a4">S-A4</a> | ML, Docs | Correct training targets and better model reliability | Planned | Not Run | — |
+| STK-004 | P0 | 0 | Select/document Indian OHLCV + corporate action data providers | <a href="#f6">F-06</a> | <a href="#s-b1">S-B1</a>, <a href="#s-b2">S-B2</a> | Data, Docs | Reliable data source strategy for daily and historical predictions | Planned | Not Run | — |
+| STK-005 | P0 | 1 | Implement historical data schema (raw + cleaned candles) | <a href="#f6">F-06</a> | <a href="#s-b2">S-B2</a> | Data, Infra | Consistent storage for backfill/training/inference | Planned | Not Run | — |
+| STK-006 | P0 | 1 | Implement symbol normalization and exchange mapping (NSE/BSE) | <a href="#f1">F-01</a>, <a href="#f6">F-06</a> | <a href="#s-a1">S-A1</a>, <a href="#s-b2">S-B2</a> | Data, API | Fewer symbol mismatch errors across UI/API/ML | Planned | Not Run | — |
+| STK-007 | P0 | 1 | Build historical backfill job | <a href="#f6">F-06</a> | <a href="#s-b2">S-B2</a> | Data, Infra | Sufficient history for training and backtesting | Planned | Not Run | — |
+| STK-008 | P0 | 1 | Build daily incremental refresh job | <a href="#f6">F-06</a> | <a href="#s-b1">S-B1</a> | Data, Infra | Predictions stay aligned to latest market data | Planned | Not Run | — |
+| STK-009 | P0 | 1 | Add data quality checks (missing dates, duplicates, outliers) | <a href="#f6">F-06</a> | <a href="#s-b1">S-B1</a>, <a href="#s-b2">S-B2</a> | Data, Infra | Reduces silent bad-data model failures | Planned | Not Run | — |
+| STK-010 | P0 | 2 | Generate feature set (trend, momentum, volatility, volume) | <a href="#f3">F-03</a>, <a href="#f4">F-04</a>, <a href="#f6">F-06</a> | <a href="#s-a3">S-A3</a>, <a href="#s-a4">S-A4</a> | ML, Data | Stronger signal quality for predictions | Planned | Not Run | — |
+| STK-011 | P0 | 2 | Include `profit_pct` and horizon as model inputs | <a href="#f2">F-02</a>, <a href="#f4">F-04</a> | <a href="#s-a2">S-A2</a>, <a href="#s-a4">S-A4</a> | ML | Personalized target prediction without separate models per profit % | Planned | Not Run | — |
+| STK-012 | P0 | 2 | Train baseline classifier for target hit within horizon | <a href="#f4">F-04</a> | <a href="#s-a4">S-A4</a> | ML | Probability output for sell target hit | Planned | Not Run | — |
+| STK-013 | P0 | 2 | Train baseline timing model for expected days to hit target | <a href="#f4">F-04</a> | <a href="#s-a4">S-A4</a> | ML | Time-to-target estimate for exit planning | Planned | Not Run | — |
+| STK-014 | P0 | 2 | Calibrate classifier probabilities (Platt/isotonic) | <a href="#f4">F-04</a>, <a href="#f7">F-07</a> | <a href="#s-a5">S-A5</a>, <a href="#s-b3">S-B3</a> | ML | More trustworthy probability/confidence messaging | Planned | Not Run | — |
+| STK-015 | P0 | 2 | Build offline evaluation report template | <a href="#f7">F-07</a> | <a href="#s-b3">S-B3</a> | ML, Docs | Repeatable model review before releases | Planned | Not Run | — |
+| STK-016 | P0 | 2 | Implement walk-forward backtesting pipeline | <a href="#f7">F-07</a> | <a href="#s-b3">S-B3</a> | ML, Data, Infra | Avoids leakage and validates strategy by regime | Planned | Not Run | — |
+| STK-017 | P0 | 2 | Save model artifacts and version metadata | <a href="#f4">F-04</a>, <a href="#f7">F-07</a> | <a href="#s-a4">S-A4</a>, <a href="#s-b3">S-B3</a> | ML, Infra | Reproducible inference and rollback safety | Planned | Not Run | — |
+| STK-018 | P0 | 3 | Define request/response schema for `/predict_gtt` | <a href="#f3">F-03</a>, <a href="#f4">F-04</a> | <a href="#s-a3">S-A3</a>, <a href="#s-a4">S-A4</a> | API, Docs | Stable integration contract for UI | Planned | Not Run | — |
+| STK-019 | P0 | 3 | Implement prediction endpoint (stock + profit % input) | <a href="#f3">F-03</a>, <a href="#f4">F-04</a> | <a href="#s-a2">S-A2</a>, <a href="#s-a3">S-A3</a>, <a href="#s-a4">S-A4</a> | API, ML | Core user value: prediction API for chosen stock and target | Planned | Not Run | — |
+| STK-020 | P0 | 3 | Implement buy GTT candidate generation and ranking | <a href="#f3">F-03</a> | <a href="#s-a3">S-A3</a> | API, ML | Actionable buy trigger instead of raw score output | Planned | Not Run | — |
+| STK-021 | P0 | 3 | Compute sell target price and horizon probabilities | <a href="#f4">F-04</a> | <a href="#s-a4">S-A4</a> | API, ML | Clear target + probability outputs for planning exits | Planned | Not Run | — |
+| STK-022 | P0 | 3 | Add explanation payload fields for GenAI summary layer | <a href="#f5">F-05</a> | <a href="#s-a5">S-A5</a> | API, ML | Enables consistent explanation generation/fallback | Planned | Not Run | — |
+| STK-023 | P0 | 3 | Build MVP UI form (stock, profit %, horizon) | <a href="#f1">F-01</a>, <a href="#f2">F-02</a> | <a href="#s-a1">S-A1</a>, <a href="#s-a2">S-A2</a> | Web | Fast user input flow for prediction requests | Planned | Not Run | — |
+| STK-024 | P0 | 3 | Build MVP result card (buy GTT, target, probability, expected days, confidence) | <a href="#f3">F-03</a>, <a href="#f4">F-04</a>, <a href="#f5">F-05</a> | <a href="#s-a3">S-A3</a>, <a href="#s-a4">S-A4</a>, <a href="#s-a5">S-A5</a> | Web | Usable decision-support output in one view | Planned | Not Run | — |
+| STK-025 | P0 | 3 | Add disclaimer and risk messaging in UI | <a href="#f5">F-05</a> | <a href="#s-a5">S-A5</a> | Web, Docs | Clear risk communication and better user trust | Planned | Not Run | — |
+| STK-026 | P1 | 4 | Add scheduled retraining workflow (weekly/monthly) | <a href="#f7">F-07</a> | <a href="#s-b3">S-B3</a> | ML, Infra | Keeps model quality from degrading silently | Planned | Not Run | — |
+| STK-027 | P1 | 4 | Add model inference logging and request trace IDs | <a href="#f5">F-05</a>, <a href="#f7">F-07</a> | <a href="#s-a5">S-A5</a> | API, ML, Web | Faster debugging and support triage | Planned | Not Run | — |
+| STK-028 | P1 | 4 | Add monitoring for data freshness and prediction failures | <a href="#f7">F-07</a> | <a href="#s-b1">S-B1</a>, <a href="#s-b3">S-B3</a> | Infra, API, Data | Detect issues before users report broken predictions | Planned | Not Run | — |
+| STK-029 | P1 | 4 | Add drift checks (feature distribution + calibration drift) | <a href="#f7">F-07</a> | <a href="#s-b3">S-B3</a> | ML, Infra | Early warning for model quality degradation | Planned | Not Run | — |
+| STK-030 | P1 | 4 | Add admin/internal metrics dashboard | <a href="#f7">F-07</a> | <a href="#s-b3">S-B3</a> | Web, API, ML | Shared visibility into performance and reliability | Planned | Not Run | — |
+| STK-031 | P1 | 5 | Save user default preferences (profit %, horizon, risk profile) | <a href="#f9">F-09</a> | <a href="#s-c1">S-C1</a> | Web, API, DB | Faster repeated usage and personalization baseline | Planned | Not Run | — |
+| STK-032 | P1 | 5 | Multi-scenario compare view (2-3 profit % targets) | <a href="#f9">F-09</a>, <a href="#f10">F-10</a> | <a href="#s-c2">S-C2</a> | Web, API | Helps users choose realistic target % | Planned | Not Run | — |
+| STK-033 | P1 | 5 | Watchlist batch prediction endpoint | <a href="#f10">F-10</a> | <a href="#s-c2">S-C2</a> | API, ML | Batch evaluation for multiple opportunities | Planned | Not Run | — |
+| STK-034 | P1 | 5 | Notification service for predicted target windows | <a href="#f8">F-08</a> | <a href="#s-c2">S-C2</a> | API, Infra, Web | Timely alerts without constant app checking | Planned | Not Run | — |
+| STK-035 | P2 | 5 | Stop-loss-aware probability and risk/reward modeling | <a href="#f11">F-11</a> | <a href="#s-c2">S-C2</a> | ML, API | Better trade quality by balancing upside and downside | Planned | Not Run | — |
+| STK-036 | P2 | 5 | Add sector/index regime features and macro overlays | <a href="#f13">F-13</a> | <a href="#s-c2">S-C2</a> | ML, Data | Better performance across changing market regimes | Planned | Not Run | — |
+| STK-037 | P2 | 5 | Add event-aware features (earnings/news/sentiment) | <a href="#f13">F-13</a> | <a href="#s-c2">S-C2</a> | ML, Data, API | Context-aware predictions around events | Planned | Not Run | — |
+| STK-038 | P2 | 5 | Personalized recommendations from user behavior | <a href="#f12">F-12</a> | <a href="#s-c1">S-C1</a>, <a href="#s-c2">S-C2</a> | ML, API, Web | More relevant predictions for repeat users | Planned | Not Run | — |
+| STK-039 | P2 | 5 | Portfolio-level ranking and allocation suggestions | <a href="#f10">F-10</a>, <a href="#f12">F-12</a> | <a href="#s-c2">S-C2</a> | ML, API, Web | Moves product from single-stock to portfolio decision support | Planned | Not Run | — |
+
 <a id="b-p0-product-data"></a>
 ## P0 - Product and Data Foundations
-
-- [ ] Define MVP stock universe (e.g., NIFTY 50 vs curated top liquid stocks)
-- [ ] Finalize prediction contract for `predict_gtt` response
-- [ ] Define label generation logic for target-hit and days-to-hit
-- [ ] Select and document data providers for Indian daily OHLCV + corporate actions
-- [ ] Implement historical data schema (raw + cleaned candles)
-- [ ] Implement symbol normalization and exchange mapping (NSE/BSE)
-- [ ] Build historical backfill job
-- [ ] Build daily incremental refresh job
-- [ ] Add data quality checks (missing dates, duplicates, outliers)
+- Included backlog IDs: `STK-001` to `STK-009`
 
 <a id="b-p0-modeling"></a>
 ## P0 - Modeling MVP
-
-- [ ] Generate feature set (trend, momentum, volatility, volume)
-- [ ] Include `profit_pct` and forecast horizon as model inputs
-- [ ] Train baseline classifier: target hit within horizon (yes/no)
-- [ ] Train baseline timing model: expected days to hit target
-- [ ] Calibrate classifier probabilities (Platt/isotonic)
-- [ ] Build offline evaluation report template
-- [ ] Implement walk-forward backtesting pipeline
-- [ ] Save model artifacts and version metadata
+- Included backlog IDs: `STK-010` to `STK-017`
 
 <a id="b-p0-api-ux"></a>
 ## P0 - API and UX MVP
-
-- [ ] Define request/response schema for `/predict_gtt`
-- [ ] Implement prediction service endpoint (stock + profit % input)
-- [ ] Implement buy GTT candidate generation and ranking
-- [ ] Compute sell target price and horizon probabilities
-- [ ] Add explanation payload fields for LLM summary layer
-- [ ] Build MVP UI form (stock, profit %, horizon)
-- [ ] Build MVP result card (buy GTT, target, probability, expected days, confidence)
-- [ ] Add disclaimer and risk messaging in UI
+- Included backlog IDs: `STK-018` to `STK-025`
 
 <a id="b-p1-reliability"></a>
 ## P1 - Reliability and Observability
-
-- [ ] Add scheduled retraining workflow (weekly/monthly)
-- [ ] Add model inference logging and request trace IDs
-- [ ] Add monitoring for data freshness and prediction failures
-- [ ] Add drift checks (feature distribution and calibration drift)
-- [ ] Add admin/internal metrics dashboard
+- Included backlog IDs: `STK-026` to `STK-030`
 
 <a id="b-p1-ux-enhancements"></a>
 ## P1 - User Experience Enhancements
-
-- [ ] Save user default preferences (profit %, horizon, risk profile)
-- [ ] Multi-scenario compare view (2-3 profit % targets)
-- [ ] Watchlist batch prediction endpoint
-- [ ] Notification service for predicted target windows
+- Included backlog IDs: `STK-031` to `STK-034`
 
 <a id="b-p2-advanced"></a>
 ## P2 - Advanced Features
-
-- [ ] Stop-loss-aware probability and risk/reward modeling
-- [ ] Sector/index regime features and macro overlays
-- [ ] Event-aware features (earnings/news/sentiment)
-- [ ] Personalized recommendations based on user behavior
-- [ ] Portfolio-level ranking and allocation suggestions
+- Included backlog IDs: `STK-035` to `STK-039`
