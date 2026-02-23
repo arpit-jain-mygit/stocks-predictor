@@ -28,10 +28,7 @@ For a selected stock and user-configured `profit_pct`, show:
 
 ## Repo Planning Docs
 
-- `ROADMAP.md` - phased delivery plan
-- `FEATURES.md` - feature catalog and scope
-- `STORIES.md` - user stories with acceptance criteria
-- `BACKLOG.md` - prioritized engineering backlog
+- `PRODUCT_PLAN.md` - consolidated roadmap, features, user stories, and backlog
 
 ## Guiding Principles
 
