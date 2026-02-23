@@ -5,6 +5,7 @@ This document consolidates the planning artifacts for the Stocks Predictor MVP a
 ## Table of Contents
 
 - [Roadmap](#roadmap)
+- [Phase Delivery Traceability](#phase-delivery-traceability)
 - [Features](#features)
 - [User Stories](#user-stories)
 - [Backlog](#backlog)
@@ -79,6 +80,195 @@ Potential expansions:
 - alerts/notifications for predicted target windows
 - sector/index context and event-aware features
 - premium tiers and personalized models
+
+## Phase Delivery Traceability
+
+This section links each roadmap phase to the features, stories, and backlog items required to deliver it.
+
+### Phase 0 -> Product Definition and Research (Week 1)
+
+Parent outcome:
+- lock MVP scope, prediction definitions, and stock universe
+
+Features in scope:
+- Feature 1: Stock Selection (scope definition only: supported universe)
+- Feature 2: User Profit % Configuration (input constraints and UX rules)
+- Feature 3: Buy GTT Suggestion (definition of what is being suggested)
+- Feature 4: Sell GTT Target Prediction (definition of probability + timing outputs)
+- Feature 5: Explanation Layer (scope boundary for GenAI usage)
+
+Stories driving this phase:
+- Story A1: Select a stock (define supported search/symbol behavior)
+- Story A2: Set desired profit % (define validation and persistence expectations)
+- Story A3: Get suggested Buy GTT (define response fields and explanation expectations)
+- Story A4: Predict Sell GTT target trigger timing (define probability/timing response expectations)
+- Story A5: Understand prediction confidence (define explanation/disclaimer expectations)
+
+Backlog items to complete in this phase:
+- Define MVP stock universe (e.g., NIFTY 50 vs curated top liquid stocks)
+- Finalize prediction contract for `predict_gtt` response
+- Define label generation logic for target-hit and days-to-hit
+- Select and document data providers for Indian daily OHLCV + corporate actions
+
+Phase 0 deliverable checklist:
+- PRD-level prediction contract drafted
+- stock universe list approved
+- label definitions documented
+- data source decision documented
+
+### Phase 1 -> Data Foundation (Weeks 2-4)
+
+Parent outcome:
+- reliable historical + daily data pipeline for supported Indian stocks
+
+Features in scope:
+- Feature 6: Historical + Daily Data Pipeline
+- Feature 1: Stock Selection (data readiness for symbol lookup and latest snapshot)
+
+Stories delivered/enabled:
+- Story B1: Daily market data refresh
+- Story B2: Historical backfill for supported stocks
+- Story A1: Select a stock (latest market snapshot dependency)
+
+Backlog items to complete in this phase:
+- Implement historical data schema (raw + cleaned candles)
+- Implement symbol normalization and exchange mapping (NSE/BSE)
+- Build historical backfill job
+- Build daily incremental refresh job
+- Add data quality checks (missing dates, duplicates, outliers)
+
+Phase 1 deliverable checklist:
+- reproducible backfill works for MVP universe
+- daily refresh pipeline runs on schedule
+- data quality checks flag bad/missing rows
+- symbol mapping supports chosen exchange symbols
+
+### Phase 2 -> MVP Modeling (Weeks 4-7)
+
+Parent outcome:
+- baseline prediction models for target-hit probability and time-to-target
+
+Features in scope:
+- Feature 3: Buy GTT Suggestion (candidate scoring foundation)
+- Feature 4: Sell GTT Target Prediction
+- Feature 6: Historical + Daily Data Pipeline (feature generation dependency)
+- Feature 7: Backtesting Dashboard (internal metrics inputs begin here)
+
+Stories delivered/enabled:
+- Story A3: Get suggested Buy GTT (baseline scoring logic)
+- Story A4: Predict Sell GTT target trigger timing
+- Story B3: Backtesting before release (pipeline and metrics foundation)
+
+Backlog items to complete in this phase:
+- Generate feature set (trend, momentum, volatility, volume)
+- Include `profit_pct` and forecast horizon as model inputs
+- Train baseline classifier: target hit within horizon (yes/no)
+- Train baseline timing model: expected days to hit target
+- Calibrate classifier probabilities (Platt/isotonic)
+- Build offline evaluation report template
+- Implement walk-forward backtesting pipeline
+- Save model artifacts and version metadata
+
+Phase 2 deliverable checklist:
+- baseline models trained and versioned
+- offline metrics report generated
+- walk-forward backtest runs end-to-end
+- calibrated probability output available for inference
+
+### Phase 3 -> Prediction API + UX MVP (Weeks 7-10)
+
+Parent outcome:
+- user-facing MVP that returns buy GTT + sell target probability/timing
+
+Features in scope:
+- Feature 1: Stock Selection (UI + API integration)
+- Feature 2: User Profit % Configuration
+- Feature 3: Buy GTT Suggestion
+- Feature 4: Sell GTT Target Prediction
+- Feature 5: Explanation Layer (initial GenAI-assisted explanation)
+
+Stories delivered:
+- Story A1: Select a stock
+- Story A2: Set desired profit %
+- Story A3: Get suggested Buy GTT
+- Story A4: Predict Sell GTT target trigger timing
+- Story A5: Understand prediction confidence
+
+Backlog items to complete in this phase:
+- Define request/response schema for `/predict_gtt`
+- Implement prediction service endpoint (stock + profit % input)
+- Implement buy GTT candidate generation and ranking
+- Compute sell target price and horizon probabilities
+- Add explanation payload fields for LLM summary layer
+- Build MVP UI form (stock, profit %, horizon)
+- Build MVP result card (buy GTT, target, probability, expected days, confidence)
+- Add disclaimer and risk messaging in UI
+
+Phase 3 deliverable checklist:
+- API returns prediction payload for MVP universe symbols
+- UI can request and render predictions
+- confidence + disclaimer shown in results
+- explanation payload available (generated or placeholder)
+
+### Phase 4 -> Backtesting and Trust Features (Weeks 10-12)
+
+Parent outcome:
+- trust and validation layer for launch readiness
+
+Features in scope:
+- Feature 7: Backtesting Dashboard (Internal MVP)
+- Feature 5: Explanation Layer (improved confidence messaging)
+
+Stories delivered/enabled:
+- Story B3: Backtesting before release (full release gate)
+- Story A5: Understand prediction confidence (improved calibration messaging)
+
+Backlog items to complete in this phase:
+- Add scheduled retraining workflow (weekly/monthly)
+- Add model inference logging and request trace IDs
+- Add monitoring for data freshness and prediction failures
+- Add drift checks (feature distribution and calibration drift)
+- Add admin/internal metrics dashboard
+
+Phase 4 deliverable checklist:
+- backtesting reports generated on schedule
+- basic observability and drift checks in place
+- internal dashboard available for model quality review
+- trust messaging updated using calibration outputs
+
+### Phase 5 -> Expansion (Post-MVP)
+
+Parent outcome:
+- richer personalization, alerts, and risk-aware product capabilities
+
+Features in scope:
+- Feature 8: Alerts and Notifications
+- Feature 9: User Preferences
+- Feature 10: Watchlist Predictions
+- Feature 11: Stop-loss and Risk/Reward Optimization
+- Feature 12: Personalized Models
+- Feature 13: Event-aware Forecasting
+
+Stories delivered/enabled:
+- Story C1: Save default profit %
+- Story C2: Compare multiple profit % scenarios
+- Additional stories to be added for alerts/watchlists/personalization
+
+Backlog items to complete in this phase:
+- Save user default preferences (profit %, horizon, risk profile)
+- Multi-scenario compare view (2-3 profit % targets)
+- Watchlist batch prediction endpoint
+- Notification service for predicted target windows
+- Stop-loss-aware probability and risk/reward modeling
+- Sector/index regime features and macro overlays
+- Event-aware features (earnings/news/sentiment)
+- Personalized recommendations based on user behavior
+- Portfolio-level ranking and allocation suggestions
+
+Phase 5 deliverable checklist:
+- post-MVP features prioritized into releases
+- personalization and alerts scoped with usage/cost guardrails
+- advanced modeling work gated by measured MVP adoption
 
 ## Features
 
