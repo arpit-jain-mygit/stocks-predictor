@@ -12,6 +12,7 @@ This document consolidates the planning artifacts for the Stocks Predictor MVP a
 
 ## Roadmap
 
+<a id="ph-0"></a>
 ## Phase 0: Product Definition and Research (Week 1)
 
 Goals:
@@ -24,6 +25,7 @@ Deliverables:
 - modeling assumptions and label definitions
 - data source shortlist (historical + daily refresh)
 
+<a id="ph-1"></a>
 ## Phase 1: Data Foundation (Weeks 2-4)
 
 Goals:
@@ -36,6 +38,7 @@ Deliverables:
 - feature generation pipeline (technical + volatility + volume)
 - reproducible backfill and daily update jobs
 
+<a id="ph-2"></a>
 ## Phase 2: MVP Modeling (Weeks 4-7)
 
 Goals:
@@ -48,6 +51,7 @@ Deliverables:
 - offline evaluation and calibration report
 - model artifacts and inference contract
 
+<a id="ph-3"></a>
 ## Phase 3: Prediction API + UX MVP (Weeks 7-10)
 
 Goals:
@@ -60,6 +64,7 @@ Deliverables:
 - MVP dashboard/UI
 - audit logging for predictions
 
+<a id="ph-4"></a>
 ## Phase 4: Backtesting and Trust Features (Weeks 10-12)
 
 Goals:
@@ -72,6 +77,7 @@ Deliverables:
 - calibration improvements
 - user-facing disclaimer and confidence presentation
 
+<a id="ph-5"></a>
 ## Phase 5: Expansion (Post-MVP)
 
 Potential expansions:
@@ -91,33 +97,34 @@ This section links each roadmap phase to the features, stories, and backlog item
 - `Feature -> Story` is generally one-to-many (one feature is delivered through multiple stories).
 - `Story -> Feature` is often many-to-one, but some stories can support multiple features.
 - Some rows currently appear `1:1` only because the initial story set is still small; this table should expand as more stories are added.
+- ID convention used in this document: `PH-*` (phase), `F-*` (feature), `S-*` (story).
 
-| Phase | Parent Outcome | Features (linked) | Stories (linked) |
+| Phase (ID) | Parent Outcome | Feature (ID) | Stories (ID + linked) |
 |---|---|---|---|
-| Phase 0 (Week 1) | Lock MVP scope, prediction definitions, and stock universe | <a href="#f1">Stock Selection</a> | <a href="#s-a1">Select a stock</a> |
-| Phase 0 (Week 1) | Lock MVP scope, prediction definitions, and stock universe | <a href="#f2">User Profit % Configuration</a> | <a href="#s-a2">Set desired profit %</a> |
-| Phase 0 (Week 1) | Lock MVP scope, prediction definitions, and stock universe | <a href="#f3">Buy GTT Suggestion</a> | <a href="#s-a3">Get suggested Buy GTT</a> |
-| Phase 0 (Week 1) | Lock MVP scope, prediction definitions, and stock universe | <a href="#f4">Sell GTT Target Prediction</a> | <a href="#s-a4">Predict Sell GTT target timing</a> |
-| Phase 0 (Week 1) | Lock MVP scope, prediction definitions, and stock universe | <a href="#f5">Explanation Layer</a> | <a href="#s-a5">Understand prediction confidence</a> |
-| Phase 1 (Weeks 2-4) | Build reliable historical + daily data foundation | <a href="#f6">Historical + Daily Data Pipeline</a> | <a href="#s-b1">Daily market data refresh</a>, <a href="#s-b2">Historical backfill for supported stocks</a> |
-| Phase 1 (Weeks 2-4) | Build reliable historical + daily data foundation | <a href="#f1">Stock Selection</a> | <a href="#s-a1">Select a stock</a> |
-| Phase 2 (Weeks 4-7) | Train baseline probability + timing models | <a href="#f3">Buy GTT Suggestion</a> | <a href="#s-a3">Get suggested Buy GTT</a> |
-| Phase 2 (Weeks 4-7) | Train baseline probability + timing models | <a href="#f4">Sell GTT Target Prediction</a> | <a href="#s-a4">Predict Sell GTT target timing</a> |
-| Phase 2 (Weeks 4-7) | Train baseline probability + timing models | <a href="#f6">Historical + Daily Data Pipeline</a> | <a href="#s-b3">Backtesting before release</a> |
-| Phase 2 (Weeks 4-7) | Train baseline probability + timing models | <a href="#f7">Backtesting Dashboard</a> | <a href="#s-b3">Backtesting before release</a> |
-| Phase 3 (Weeks 7-10) | Deliver MVP API + UI for prediction flow | <a href="#f1">Stock Selection</a> | <a href="#s-a1">Select a stock</a> |
-| Phase 3 (Weeks 7-10) | Deliver MVP API + UI for prediction flow | <a href="#f2">User Profit % Configuration</a> | <a href="#s-a2">Set desired profit %</a> |
-| Phase 3 (Weeks 7-10) | Deliver MVP API + UI for prediction flow | <a href="#f3">Buy GTT Suggestion</a> | <a href="#s-a3">Get suggested Buy GTT</a> |
-| Phase 3 (Weeks 7-10) | Deliver MVP API + UI for prediction flow | <a href="#f4">Sell GTT Target Prediction</a> | <a href="#s-a4">Predict Sell GTT target timing</a> |
-| Phase 3 (Weeks 7-10) | Deliver MVP API + UI for prediction flow | <a href="#f5">Explanation Layer</a> | <a href="#s-a5">Understand prediction confidence</a> |
-| Phase 4 (Weeks 10-12) | Add trust, backtesting, and observability for launch readiness | <a href="#f7">Backtesting Dashboard</a> | <a href="#s-b3">Backtesting before release</a> |
-| Phase 4 (Weeks 10-12) | Add trust, backtesting, and observability for launch readiness | <a href="#f5">Explanation Layer</a> | <a href="#s-a5">Understand prediction confidence</a> |
-| Phase 5 (Post-MVP) | Expand to personalization, alerts, and advanced modeling | <a href="#f8">Alerts and Notifications</a> | <a href="#s-c2">Compare multiple profit % scenarios</a> |
-| Phase 5 (Post-MVP) | Expand to personalization, alerts, and advanced modeling | <a href="#f9">User Preferences</a> | <a href="#s-c1">Save default profit %</a>, <a href="#s-c2">Compare multiple profit % scenarios</a> |
-| Phase 5 (Post-MVP) | Expand to personalization, alerts, and advanced modeling | <a href="#f10">Watchlist Predictions</a> | <a href="#s-c2">Compare multiple profit % scenarios</a> |
-| Phase 5 (Post-MVP) | Expand to personalization, alerts, and advanced modeling | <a href="#f11">Stop-loss and Risk/Reward Optimization</a> | <a href="#s-c2">Compare multiple profit % scenarios</a> |
-| Phase 5 (Post-MVP) | Expand to personalization, alerts, and advanced modeling | <a href="#f12">Personalized Models</a> | <a href="#s-c1">Save default profit %</a> |
-| Phase 5 (Post-MVP) | Expand to personalization, alerts, and advanced modeling | <a href="#f13">Event-aware Forecasting</a> | <a href="#s-c2">Compare multiple profit % scenarios</a> |
+| <a href="#ph-0">PH-0</a> | Lock MVP scope, prediction definitions, and stock universe | <a href="#f1">F-01 Stock Selection</a> | <a href="#s-a1">S-A1 Select a stock</a> |
+| <a href="#ph-0">PH-0</a> | Lock MVP scope, prediction definitions, and stock universe | <a href="#f2">F-02 User Profit % Configuration</a> | <a href="#s-a2">S-A2 Set desired profit %</a> |
+| <a href="#ph-0">PH-0</a> | Lock MVP scope, prediction definitions, and stock universe | <a href="#f3">F-03 Buy GTT Suggestion</a> | <a href="#s-a3">S-A3 Get suggested Buy GTT</a> |
+| <a href="#ph-0">PH-0</a> | Lock MVP scope, prediction definitions, and stock universe | <a href="#f4">F-04 Sell GTT Target Prediction</a> | <a href="#s-a4">S-A4 Predict Sell GTT target timing</a> |
+| <a href="#ph-0">PH-0</a> | Lock MVP scope, prediction definitions, and stock universe | <a href="#f5">F-05 Explanation Layer</a> | <a href="#s-a5">S-A5 Understand prediction confidence</a> |
+| <a href="#ph-1">PH-1</a> | Build reliable historical + daily data foundation | <a href="#f6">F-06 Historical + Daily Data Pipeline</a> | <a href="#s-b1">S-B1 Daily market data refresh</a>, <a href="#s-b2">S-B2 Historical backfill for supported stocks</a> |
+| <a href="#ph-1">PH-1</a> | Build reliable historical + daily data foundation | <a href="#f1">F-01 Stock Selection</a> | <a href="#s-a1">S-A1 Select a stock</a> |
+| <a href="#ph-2">PH-2</a> | Train baseline probability + timing models | <a href="#f3">F-03 Buy GTT Suggestion</a> | <a href="#s-a3">S-A3 Get suggested Buy GTT</a> |
+| <a href="#ph-2">PH-2</a> | Train baseline probability + timing models | <a href="#f4">F-04 Sell GTT Target Prediction</a> | <a href="#s-a4">S-A4 Predict Sell GTT target timing</a> |
+| <a href="#ph-2">PH-2</a> | Train baseline probability + timing models | <a href="#f6">F-06 Historical + Daily Data Pipeline</a> | <a href="#s-b3">S-B3 Backtesting before release</a> |
+| <a href="#ph-2">PH-2</a> | Train baseline probability + timing models | <a href="#f7">F-07 Backtesting Dashboard</a> | <a href="#s-b3">S-B3 Backtesting before release</a> |
+| <a href="#ph-3">PH-3</a> | Deliver MVP API + UI for prediction flow | <a href="#f1">F-01 Stock Selection</a> | <a href="#s-a1">S-A1 Select a stock</a> |
+| <a href="#ph-3">PH-3</a> | Deliver MVP API + UI for prediction flow | <a href="#f2">F-02 User Profit % Configuration</a> | <a href="#s-a2">S-A2 Set desired profit %</a> |
+| <a href="#ph-3">PH-3</a> | Deliver MVP API + UI for prediction flow | <a href="#f3">F-03 Buy GTT Suggestion</a> | <a href="#s-a3">S-A3 Get suggested Buy GTT</a> |
+| <a href="#ph-3">PH-3</a> | Deliver MVP API + UI for prediction flow | <a href="#f4">F-04 Sell GTT Target Prediction</a> | <a href="#s-a4">S-A4 Predict Sell GTT target timing</a> |
+| <a href="#ph-3">PH-3</a> | Deliver MVP API + UI for prediction flow | <a href="#f5">F-05 Explanation Layer</a> | <a href="#s-a5">S-A5 Understand prediction confidence</a> |
+| <a href="#ph-4">PH-4</a> | Add trust, backtesting, and observability for launch readiness | <a href="#f7">F-07 Backtesting Dashboard</a> | <a href="#s-b3">S-B3 Backtesting before release</a> |
+| <a href="#ph-4">PH-4</a> | Add trust, backtesting, and observability for launch readiness | <a href="#f5">F-05 Explanation Layer</a> | <a href="#s-a5">S-A5 Understand prediction confidence</a> |
+| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f8">F-08 Alerts and Notifications</a> | <a href="#s-c2">S-C2 Compare multiple profit % scenarios</a> |
+| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f9">F-09 User Preferences</a> | <a href="#s-c1">S-C1 Save default profit %</a>, <a href="#s-c2">S-C2 Compare multiple profit % scenarios</a> |
+| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f10">F-10 Watchlist Predictions</a> | <a href="#s-c2">S-C2 Compare multiple profit % scenarios</a> |
+| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f11">F-11 Stop-loss and Risk/Reward Optimization</a> | <a href="#s-c2">S-C2 Compare multiple profit % scenarios</a> |
+| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f12">F-12 Personalized Models</a> | <a href="#s-c1">S-C1 Save default profit %</a> |
+| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f13">F-13 Event-aware Forecasting</a> | <a href="#s-c2">S-C2 Compare multiple profit % scenarios</a> |
 
 ### Feature and Backlog Traceability (Support View)
 
@@ -146,43 +153,43 @@ This section links each roadmap phase to the features, stories, and backlog item
 ## MVP Features (Must Have)
 
 <a id="f1"></a>
-### 1. Stock Selection (Indian Equities)
+### Feature F-01: Stock Selection (Indian Equities)
 - Search/select stock by symbol and company name
 - Support initial universe (e.g., NIFTY 50 / curated list)
 - Display latest close and recent trend summary
 
 <a id="f2"></a>
-### 2. User Profit % Configuration
+### Feature F-02: User Profit % Configuration
 - User enters desired profit percentage per transaction
 - Validation for min/max range (example: 1% to 25%)
 - Profit % stored per prediction request and optionally as default preference
 
 <a id="f3"></a>
-### 3. Buy GTT Suggestion
+### Feature F-03: Buy GTT Suggestion
 - Suggest a Buy GTT trigger price based on candidate entry rules + model ranking
 - Show confidence and expected fill window
 - Show assumptions used (horizon, volatility regime)
 
 <a id="f4"></a>
-### 4. Sell GTT Target Prediction
+### Feature F-04: Sell GTT Target Prediction
 - Compute sell target price from buy price and user profit %
 - Predict probability of target hit within horizons (5/10/20 trading days)
 - Predict expected time to target hit
 
 <a id="f5"></a>
-### 5. Explanation Layer (GenAI-assisted)
+### Feature F-05: Explanation Layer (GenAI-assisted)
 - Natural language explanation of prediction drivers
 - Plain-language risk notes and confidence interpretation
 - Explain how profit % affects probability/timing
 
 <a id="f6"></a>
-### 6. Historical + Daily Data Pipeline
+### Feature F-06: Historical + Daily Data Pipeline
 - Historical backfill ingestion
 - Daily incremental updates
 - Data quality checks for missing/duplicate candles
 
 <a id="f7"></a>
-### 7. Backtesting Dashboard (Internal MVP)
+### Feature F-07: Backtesting Dashboard (Internal MVP)
 - Hit-rate by stock and horizon
 - Calibration checks (predicted vs actual)
 - Performance by market regime/time window
@@ -190,34 +197,34 @@ This section links each roadmap phase to the features, stories, and backlog item
 ## V1.1 Features (Should Have)
 
 <a id="f8"></a>
-### 8. Alerts and Notifications
+### Feature F-08: Alerts and Notifications
 - Notify users when predicted target window approaches
 - Notify when confidence drops materially after market move
 
 <a id="f9"></a>
-### 9. User Preferences
+### Feature F-09: User Preferences
 - Default profit %
 - Preferred horizon
 - Risk appetite (conservative/balanced/aggressive)
 
 <a id="f10"></a>
-### 10. Watchlist Predictions
+### Feature F-10: Watchlist Predictions
 - Batch predictions for a user watchlist
 - Rank opportunities by probability x expected time
 
 ## Future Features (Could Have)
 
 <a id="f11"></a>
-### 11. Stop-loss and Risk/Reward Optimization
+### Feature F-11: Stop-loss and Risk/Reward Optimization
 - User-configurable stop-loss %
 - Recommend trade only if risk/reward and probability criteria met
 
 <a id="f12"></a>
-### 12. Personalized Models
+### Feature F-12: Personalized Models
 - Personalization based on user behavior, holding period, and risk profile
 
 <a id="f13"></a>
-### 13. Event-aware Forecasting
+### Feature F-13: Event-aware Forecasting
 - Earnings calendar, corporate announcements, macro signals, news sentiment
 
 ## User Stories
@@ -225,7 +232,7 @@ This section links each roadmap phase to the features, stories, and backlog item
 ## Epic A: Core Prediction Experience
 
 <a id="s-a1"></a>
-### Story A1: Select a stock
+### Story S-A1: Select a stock
 As a user, I want to search and select an Indian stock so that I can request a prediction for that stock.
 
 Scope:
@@ -248,7 +255,7 @@ Edge Cases:
 - Market closed day / holiday (latest date is prior trading day).
 
 <a id="s-a2"></a>
-### Story A2: Set desired profit %
+### Story S-A2: Set desired profit %
 As a user, I want to enter my desired profit percentage for a transaction so that the prediction is tailored to my goal.
 
 Scope:
@@ -271,7 +278,7 @@ Edge Cases:
 - Locale formatting input (e.g., `5`, `5%`, `5.0`)
 
 <a id="s-a3"></a>
-### Story A3: Get suggested Buy GTT
+### Story S-A3: Get suggested Buy GTT
 As a user, I want a suggested Buy GTT price so that I know a reasonable entry trigger to place.
 
 Scope:
@@ -295,7 +302,7 @@ Edge Cases:
 - Model unavailable (degraded response or error state)
 
 <a id="s-a4"></a>
-### Story A4: Predict Sell GTT target trigger timing
+### Story S-A4: Predict Sell GTT target trigger timing
 As a user, I want to know the probability and expected time for my sell target (based on profit %) to be hit so that I can plan exits.
 
 Scope:
@@ -318,7 +325,7 @@ Edge Cases:
 - Stale feature data / data freshness warning
 
 <a id="s-a5"></a>
-### Story A5: Understand prediction confidence
+### Story S-A5: Understand prediction confidence
 As a user, I want the predictor to explain why confidence is high or low so that I can make informed decisions.
 
 Scope:
@@ -345,7 +352,7 @@ Edge Cases:
 ## Epic B: Data and Reliability
 
 <a id="s-b1"></a>
-### Story B1: Daily market data refresh
+### Story S-B1: Daily market data refresh
 As a platform operator, I want daily stock data to refresh automatically so that predictions use recent data.
 
 Scope:
@@ -369,7 +376,7 @@ Edge Cases:
 - Late-arriving data corrections
 
 <a id="s-b2"></a>
-### Story B2: Historical backfill for supported stocks
+### Story S-B2: Historical backfill for supported stocks
 As a platform operator, I want historical data backfilled so that the model can train on sufficient history.
 
 Scope:
@@ -393,7 +400,7 @@ Edge Cases:
 - Provider returns inconsistent date formats/timezones
 
 <a id="s-b3"></a>
-### Story B3: Backtesting before release
+### Story S-B3: Backtesting before release
 As a platform operator, I want walk-forward backtests so that we can validate the predictor before user launch.
 
 Scope:
@@ -419,7 +426,7 @@ Edge Cases:
 ## Epic C: User Preferences and UX
 
 <a id="s-c1"></a>
-### Story C1: Save default profit %
+### Story S-C1: Save default profit %
 As a returning user, I want to save a default profit % so that I do not need to re-enter it each time.
 
 Scope:
@@ -441,7 +448,7 @@ Edge Cases:
 - Anonymous user mode (fallback local preference)
 
 <a id="s-c2"></a>
-### Story C2: Compare multiple profit % scenarios
+### Story S-C2: Compare multiple profit % scenarios
 As a user, I want to compare outcomes for different profit % values so that I can choose a realistic target.
 
 Scope:
