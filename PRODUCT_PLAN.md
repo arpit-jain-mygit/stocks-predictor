@@ -228,46 +228,119 @@ This section links each roadmap phase to the features, stories, and backlog item
 ### Story A1: Select a stock
 As a user, I want to search and select an Indian stock so that I can request a prediction for that stock.
 
+Scope:
+- Search by NSE/BSE symbol and company name for the supported stock universe.
+- Return a selectable result with symbol, company name, exchange, and latest market date.
+
+Dependencies:
+- Feature: Stock Selection
+- Data readiness from daily refresh/backfill (Stories B1, B2)
+
 Acceptance Criteria:
-- I can search by symbol or company name.
-- The system shows matching supported stocks.
-- Selecting a stock loads latest market snapshot (at minimum latest close and date).
+- I can search by symbol or company name with partial input.
+- The system shows matching supported stocks with no unsupported symbols in results.
+- Selecting a stock loads a latest market snapshot (at minimum close price and as-of date).
+- If fresh market data is unavailable, the UI shows the last available market date clearly.
+
+Edge Cases:
+- No results for query.
+- Ambiguous symbols across exchanges.
+- Market closed day / holiday (latest date is prior trading day).
 
 <a id="s-a2"></a>
 ### Story A2: Set desired profit %
 As a user, I want to enter my desired profit percentage for a transaction so that the prediction is tailored to my goal.
 
+Scope:
+- User enters and edits a profit target % as part of a prediction request.
+- Input is validated before API submission.
+
+Dependencies:
+- Feature: User Profit % Configuration
+- API request schema for `/predict_gtt`
+
 Acceptance Criteria:
-- I can enter a profit % value.
-- Invalid inputs are rejected with a clear message.
-- The chosen profit % is used in the prediction output.
+- I can enter a profit % value and submit a prediction request.
+- Invalid inputs (empty, non-numeric, negative, out-of-range) are rejected with clear messages.
+- The selected profit % is echoed in the prediction response.
+- The sell target price is computed using the chosen profit % and displayed in the result.
+
+Edge Cases:
+- Decimal percentages (e.g., `4.5%`)
+- Very high values above configured threshold
+- Locale formatting input (e.g., `5`, `5%`, `5.0`)
 
 <a id="s-a3"></a>
 ### Story A3: Get suggested Buy GTT
 As a user, I want a suggested Buy GTT price so that I know a reasonable entry trigger to place.
 
+Scope:
+- API returns one ranked Buy GTT suggestion based on candidate generation and model scoring.
+- UI displays the suggested trigger with context.
+
+Dependencies:
+- Feature: Buy GTT Suggestion
+- Modeling outputs from Phase 2
+- Input stock selection and profit % (Stories A1, A2)
+
 Acceptance Criteria:
-- The system returns a suggested Buy GTT price.
-- The response includes confidence and a prediction timestamp.
-- The response includes a short explanation of the suggestion basis.
+- The system returns a suggested Buy GTT price for supported symbols.
+- Response includes confidence level and prediction timestamp.
+- Response includes a short machine-readable explanation payload (for UI/GenAI explanation).
+- UI shows the buy trigger and indicates the assumption horizon used.
+
+Edge Cases:
+- Low-confidence prediction (still returns result with warning)
+- No valid candidate entry found (graceful fallback message)
+- Model unavailable (degraded response or error state)
 
 <a id="s-a4"></a>
 ### Story A4: Predict Sell GTT target trigger timing
 As a user, I want to know the probability and expected time for my sell target (based on profit %) to be hit so that I can plan exits.
 
+Scope:
+- Compute sell target from buy GTT + user `profit_pct`.
+- Predict probability and expected time-to-hit across one or more horizons.
+
+Dependencies:
+- Feature: Sell GTT Target Prediction
+- Baseline probability and timing models from Phase 2
+
 Acceptance Criteria:
 - The system returns computed sell target price.
-- The system returns probability of hit within at least one horizon.
-- The system returns expected trading days to hit or indicates low confidence/no estimate.
+- The system returns hit probability for at least one horizon (target: 5/10/20 trading days).
+- The system returns expected trading days to hit, or a clear “insufficient confidence” state.
+- All values include an `as_of_date` and model version metadata in the API response.
+
+Edge Cases:
+- Probability available but no stable expected-days estimate
+- Extremely low probability targets (e.g., high profit % in low-volatility stock)
+- Stale feature data / data freshness warning
 
 <a id="s-a5"></a>
 ### Story A5: Understand prediction confidence
 As a user, I want the predictor to explain why confidence is high or low so that I can make informed decisions.
 
+Scope:
+- Show a concise explanation of confidence using model outputs and/or Vertex explanation layer.
+- Explain tradeoffs (profit target vs probability/time).
+
+Dependencies:
+- Feature: Explanation Layer
+- Prediction output from Stories A3 and A4
+- Vertex integration (optional in MVP, fallback supported)
+
 Acceptance Criteria:
-- The explanation is plain language and understandable.
-- It mentions key drivers (trend/volatility/volume context).
-- It includes a non-advisory disclaimer.
+- Explanation is plain language and understandable.
+- Explanation references key drivers (e.g., trend, volatility, volume, horizon).
+- Explanation clarifies confidence level meaning (high/medium/low).
+- UI includes a non-advisory disclaimer.
+- If explanation generation fails, prediction still renders with a fallback message.
+
+Edge Cases:
+- Vertex timeout/error
+- Missing driver summary data from model response
+- User requests unsupported language (future enhancement)
 
 ## Epic B: Data and Reliability
 
@@ -275,28 +348,73 @@ Acceptance Criteria:
 ### Story B1: Daily market data refresh
 As a platform operator, I want daily stock data to refresh automatically so that predictions use recent data.
 
+Scope:
+- Scheduled ingestion of daily OHLCV data for the supported universe.
+- Data quality checks and run-status logging.
+
+Dependencies:
+- Feature: Historical + Daily Data Pipeline
+- Scheduler setup (GitHub Actions / cron)
+- Data provider integration
+
 Acceptance Criteria:
-- A scheduled job ingests the latest daily candles.
-- Missing/duplicate rows are detected and flagged.
-- A refresh status is visible in logs/monitoring.
+- A scheduled job ingests the latest daily candles for supported stocks.
+- Missing and duplicate rows are detected and flagged.
+- Run status (success/failure, processed count, timestamp) is visible in logs/monitoring.
+- Pipeline is idempotent for repeated runs on the same market date.
+
+Edge Cases:
+- Exchange holiday / no trading session
+- Partial provider outage
+- Late-arriving data corrections
 
 <a id="s-b2"></a>
 ### Story B2: Historical backfill for supported stocks
 As a platform operator, I want historical data backfilled so that the model can train on sufficient history.
 
+Scope:
+- Backfill historical OHLCV data across the chosen stock universe and training time range.
+- Generate a coverage summary for model readiness.
+
+Dependencies:
+- Feature: Historical + Daily Data Pipeline
+- Data provider integration
+- Symbol normalization logic
+
 Acceptance Criteria:
-- Backfill runs for supported stock universe.
-- Corporate actions adjustments are handled or clearly documented.
-- Data coverage report is generated.
+- Backfill runs for the supported stock universe across the configured history window.
+- Corporate action handling (adjusted data or documented limitations) is implemented or explicitly documented.
+- A data coverage report is generated (symbols, date range, gaps, row counts).
+- Backfill can be rerun safely without duplicating rows.
+
+Edge Cases:
+- Symbol rename/migration
+- Missing early history for some stocks
+- Provider returns inconsistent date formats/timezones
 
 <a id="s-b3"></a>
 ### Story B3: Backtesting before release
 As a platform operator, I want walk-forward backtests so that we can validate the predictor before user launch.
 
+Scope:
+- Run walk-forward evaluation on historical periods before release decisions.
+- Produce metrics suitable for launch go/no-go.
+
+Dependencies:
+- Feature: Backtesting Dashboard
+- Modeling outputs and saved artifacts
+- Label generation + feature pipeline stability
+
 Acceptance Criteria:
-- Backtests avoid future leakage.
-- Metrics are generated by time period and stock.
+- Backtests avoid future leakage (time-based train/test split and walk-forward evaluation).
+- Metrics are generated by time period and stock (at minimum hit rate and timing error).
 - Calibration metrics are included for probability outputs.
+- A report artifact is generated and versioned for review.
+
+Edge Cases:
+- Regime shift periods (bull/bear/sideways)
+- Sparse data for newer symbols
+- Metrics degradation after retraining compared to previous version
 
 ## Epic C: User Preferences and UX
 
@@ -304,19 +422,46 @@ Acceptance Criteria:
 ### Story C1: Save default profit %
 As a returning user, I want to save a default profit % so that I do not need to re-enter it each time.
 
+Scope:
+- Persist a user-level default profit % preference and prefill it in the prediction form.
+
+Dependencies:
+- Feature: User Preferences
+- User identity/session model (or local storage in MVP fallback)
+
 Acceptance Criteria:
 - User can set and update default profit %.
-- New predictions prefill that value.
-- Manual override for individual predictions is still allowed.
+- New prediction forms prefill the saved value.
+- Manual override for an individual prediction request is allowed without changing the saved default.
+- The saved default is validated using the same rules as Story A2.
+
+Edge Cases:
+- No saved preference exists
+- Invalid legacy saved value after validation rule changes
+- Anonymous user mode (fallback local preference)
 
 <a id="s-c2"></a>
 ### Story C2: Compare multiple profit % scenarios
 As a user, I want to compare outcomes for different profit % values so that I can choose a realistic target.
 
+Scope:
+- Run and display multiple prediction scenarios for the same stock across multiple profit % values.
+
+Dependencies:
+- Feature: Watchlist Predictions (batching pattern, optional reuse)
+- Feature: User Preferences
+- Stories A3, A4, A5 baseline prediction/explanation flow
+
 Acceptance Criteria:
-- I can request at least 2-3 scenarios (e.g., 4%, 8%, 12%).
-- The UI shows probability/time comparisons side-by-side.
-- The explanation highlights the tradeoff between higher profit and lower hit probability.
+- User can request at least 2-3 scenarios (e.g., 4%, 8%, 12%).
+- UI shows side-by-side comparison of target price, hit probability, and expected time.
+- Explanation highlights the tradeoff between higher profit and lower hit probability.
+- Scenario results share the same as-of date or clearly show if they differ.
+
+Edge Cases:
+- One scenario returns low confidence while others succeed
+- API timeout for one scenario in a batch
+- Duplicate profit % values entered by user
 
 ## Backlog
 
