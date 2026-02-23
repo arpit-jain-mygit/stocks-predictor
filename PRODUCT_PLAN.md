@@ -99,54 +99,32 @@ This section links each roadmap phase to the features, stories, and backlog item
 - Some rows currently appear `1:1` only because the initial story set is still small; this table should expand as more stories are added.
 - ID convention used in this document: `PH-*` (phase), `F-*` (feature), `S-*` (story).
 
-| Phase (ID) | Parent Outcome | Feature (ID) | Stories (ID + linked) |
-|---|---|---|---|
-| <a href="#ph-0">PH-0</a> | Lock MVP scope, prediction definitions, and stock universe | <a href="#f1">F-01 Stock Selection</a> | <a href="#s-a1">S-A1 Select a stock</a> |
-| <a href="#ph-0">PH-0</a> | Lock MVP scope, prediction definitions, and stock universe | <a href="#f2">F-02 User Profit % Configuration</a> | <a href="#s-a2">S-A2 Set desired profit %</a> |
-| <a href="#ph-0">PH-0</a> | Lock MVP scope, prediction definitions, and stock universe | <a href="#f3">F-03 Buy GTT Suggestion</a> | <a href="#s-a3">S-A3 Get suggested Buy GTT</a> |
-| <a href="#ph-0">PH-0</a> | Lock MVP scope, prediction definitions, and stock universe | <a href="#f4">F-04 Sell GTT Target Prediction</a> | <a href="#s-a4">S-A4 Predict Sell GTT target timing</a> |
-| <a href="#ph-0">PH-0</a> | Lock MVP scope, prediction definitions, and stock universe | <a href="#f5">F-05 Explanation Layer</a> | <a href="#s-a5">S-A5 Understand prediction confidence</a> |
-| <a href="#ph-1">PH-1</a> | Build reliable historical + daily data foundation | <a href="#f6">F-06 Historical + Daily Data Pipeline</a> | <a href="#s-b1">S-B1 Daily market data refresh</a>, <a href="#s-b2">S-B2 Historical backfill for supported stocks</a> |
-| <a href="#ph-1">PH-1</a> | Build reliable historical + daily data foundation | <a href="#f1">F-01 Stock Selection</a> | <a href="#s-a1">S-A1 Select a stock</a> |
-| <a href="#ph-2">PH-2</a> | Train baseline probability + timing models | <a href="#f3">F-03 Buy GTT Suggestion</a> | <a href="#s-a3">S-A3 Get suggested Buy GTT</a> |
-| <a href="#ph-2">PH-2</a> | Train baseline probability + timing models | <a href="#f4">F-04 Sell GTT Target Prediction</a> | <a href="#s-a4">S-A4 Predict Sell GTT target timing</a> |
-| <a href="#ph-2">PH-2</a> | Train baseline probability + timing models | <a href="#f6">F-06 Historical + Daily Data Pipeline</a> | <a href="#s-b3">S-B3 Backtesting before release</a> |
-| <a href="#ph-2">PH-2</a> | Train baseline probability + timing models | <a href="#f7">F-07 Backtesting Dashboard</a> | <a href="#s-b3">S-B3 Backtesting before release</a> |
-| <a href="#ph-3">PH-3</a> | Deliver MVP API + UI for prediction flow | <a href="#f1">F-01 Stock Selection</a> | <a href="#s-a1">S-A1 Select a stock</a> |
-| <a href="#ph-3">PH-3</a> | Deliver MVP API + UI for prediction flow | <a href="#f2">F-02 User Profit % Configuration</a> | <a href="#s-a2">S-A2 Set desired profit %</a> |
-| <a href="#ph-3">PH-3</a> | Deliver MVP API + UI for prediction flow | <a href="#f3">F-03 Buy GTT Suggestion</a> | <a href="#s-a3">S-A3 Get suggested Buy GTT</a> |
-| <a href="#ph-3">PH-3</a> | Deliver MVP API + UI for prediction flow | <a href="#f4">F-04 Sell GTT Target Prediction</a> | <a href="#s-a4">S-A4 Predict Sell GTT target timing</a> |
-| <a href="#ph-3">PH-3</a> | Deliver MVP API + UI for prediction flow | <a href="#f5">F-05 Explanation Layer</a> | <a href="#s-a5">S-A5 Understand prediction confidence</a> |
-| <a href="#ph-4">PH-4</a> | Add trust, backtesting, and observability for launch readiness | <a href="#f7">F-07 Backtesting Dashboard</a> | <a href="#s-b3">S-B3 Backtesting before release</a> |
-| <a href="#ph-4">PH-4</a> | Add trust, backtesting, and observability for launch readiness | <a href="#f5">F-05 Explanation Layer</a> | <a href="#s-a5">S-A5 Understand prediction confidence</a> |
-| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f8">F-08 Alerts and Notifications</a> | <a href="#s-c2">S-C2 Compare multiple profit % scenarios</a> |
-| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f9">F-09 User Preferences</a> | <a href="#s-c1">S-C1 Save default profit %</a>, <a href="#s-c2">S-C2 Compare multiple profit % scenarios</a> |
-| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f10">F-10 Watchlist Predictions</a> | <a href="#s-c2">S-C2 Compare multiple profit % scenarios</a> |
-| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f11">F-11 Stop-loss and Risk/Reward Optimization</a> | <a href="#s-c2">S-C2 Compare multiple profit % scenarios</a> |
-| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f12">F-12 Personalized Models</a> | <a href="#s-c1">S-C1 Save default profit %</a> |
-| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f13">F-13 Event-aware Forecasting</a> | <a href="#s-c2">S-C2 Compare multiple profit % scenarios</a> |
-
-### Feature and Backlog Traceability (Support View)
-
-| Phase | Features (linked) | Backlog (linked) |
-|---|---|---|
-| Phase 0 (Week 1) | <a href="#f1">Stock Selection</a>, <a href="#f2">User Profit % Configuration</a>, <a href="#f3">Buy GTT Suggestion</a>, <a href="#f4">Sell GTT Target Prediction</a>, <a href="#f5">Explanation Layer</a> | <a href="#b-p0-product-data">P0 Product and Data Foundations</a> (scope, contract, labels, provider selection) |
-| Phase 1 (Weeks 2-4) | <a href="#f6">Historical + Daily Data Pipeline</a>, <a href="#f1">Stock Selection</a> | <a href="#b-p0-product-data">P0 Product and Data Foundations</a> (schema, mapping, backfill, refresh, data quality) |
-| Phase 2 (Weeks 4-7) | <a href="#f3">Buy GTT Suggestion</a>, <a href="#f4">Sell GTT Target Prediction</a>, <a href="#f6">Historical + Daily Data Pipeline</a>, <a href="#f7">Backtesting Dashboard</a> | <a href="#b-p0-modeling">P0 Modeling MVP</a> |
-| Phase 3 (Weeks 7-10) | <a href="#f1">Stock Selection</a>, <a href="#f2">User Profit % Configuration</a>, <a href="#f3">Buy GTT Suggestion</a>, <a href="#f4">Sell GTT Target Prediction</a>, <a href="#f5">Explanation Layer</a> | <a href="#b-p0-api-ux">P0 API and UX MVP</a> |
-| Phase 4 (Weeks 10-12) | <a href="#f7">Backtesting Dashboard</a>, <a href="#f5">Explanation Layer</a> | <a href="#b-p1-reliability">P1 Reliability and Observability</a> |
-| Phase 5 (Post-MVP) | <a href="#f8">Alerts and Notifications</a>, <a href="#f9">User Preferences</a>, <a href="#f10">Watchlist Predictions</a>, <a href="#f11">Stop-loss and Risk/Reward Optimization</a>, <a href="#f12">Personalized Models</a>, <a href="#f13">Event-aware Forecasting</a> | <a href="#b-p1-ux-enhancements">P1 User Experience Enhancements</a>, <a href="#b-p2-advanced">P2 Advanced Features</a> |
-
-### Phase Exit Criteria (Simple View)
-
-| Phase | Exit Criteria |
-|---|---|
-| Phase 0 | Scope, prediction contract, labels, and data source decisions are documented and approved. |
-| Phase 1 | Backfill + daily refresh + symbol normalization + data quality checks run reliably for MVP universe. |
-| Phase 2 | Baseline models are trained, evaluated, calibrated, and versioned; walk-forward backtest runs end-to-end. |
-| Phase 3 | User can request and view Buy GTT + Sell GTT probability/timing with confidence and disclaimer. |
-| Phase 4 | Backtesting reporting, observability, and drift checks support launch readiness decisions. |
-| Phase 5 | Post-MVP features are shipped in prioritized releases with cost/usage controls. |
+| Phase (ID) | Parent Outcome | Feature (ID) | Stories (ID + linked) | Backlog (linked) | Phase Exit Criteria |
+|---|---|---|---|---|---|
+| <a href="#ph-0">PH-0</a> | Lock MVP scope, prediction definitions, and stock universe | <a href="#f1">F-01 Stock Selection</a> | <a href="#s-a1">S-A1 Select a stock</a> | <a href="#b-p0-product-data">P0 Product and Data Foundations</a> | Scope, prediction contract, labels, and data source decisions are documented and approved. |
+| <a href="#ph-0">PH-0</a> | Lock MVP scope, prediction definitions, and stock universe | <a href="#f2">F-02 User Profit % Configuration</a> | <a href="#s-a2">S-A2 Set desired profit %</a> | <a href="#b-p0-product-data">P0 Product and Data Foundations</a> | Scope, prediction contract, labels, and data source decisions are documented and approved. |
+| <a href="#ph-0">PH-0</a> | Lock MVP scope, prediction definitions, and stock universe | <a href="#f3">F-03 Buy GTT Suggestion</a> | <a href="#s-a3">S-A3 Get suggested Buy GTT</a> | <a href="#b-p0-product-data">P0 Product and Data Foundations</a> | Scope, prediction contract, labels, and data source decisions are documented and approved. |
+| <a href="#ph-0">PH-0</a> | Lock MVP scope, prediction definitions, and stock universe | <a href="#f4">F-04 Sell GTT Target Prediction</a> | <a href="#s-a4">S-A4 Predict Sell GTT target timing</a> | <a href="#b-p0-product-data">P0 Product and Data Foundations</a> | Scope, prediction contract, labels, and data source decisions are documented and approved. |
+| <a href="#ph-0">PH-0</a> | Lock MVP scope, prediction definitions, and stock universe | <a href="#f5">F-05 Explanation Layer</a> | <a href="#s-a5">S-A5 Understand prediction confidence</a> | <a href="#b-p0-product-data">P0 Product and Data Foundations</a> | Scope, prediction contract, labels, and data source decisions are documented and approved. |
+| <a href="#ph-1">PH-1</a> | Build reliable historical + daily data foundation | <a href="#f6">F-06 Historical + Daily Data Pipeline</a> | <a href="#s-b1">S-B1 Daily market data refresh</a>, <a href="#s-b2">S-B2 Historical backfill for supported stocks</a> | <a href="#b-p0-product-data">P0 Product and Data Foundations</a> | Backfill + daily refresh + symbol normalization + data quality checks run reliably for MVP universe. |
+| <a href="#ph-1">PH-1</a> | Build reliable historical + daily data foundation | <a href="#f1">F-01 Stock Selection</a> | <a href="#s-a1">S-A1 Select a stock</a> | <a href="#b-p0-product-data">P0 Product and Data Foundations</a> | Backfill + daily refresh + symbol normalization + data quality checks run reliably for MVP universe. |
+| <a href="#ph-2">PH-2</a> | Train baseline probability + timing models | <a href="#f3">F-03 Buy GTT Suggestion</a> | <a href="#s-a3">S-A3 Get suggested Buy GTT</a> | <a href="#b-p0-modeling">P0 Modeling MVP</a> | Baseline models are trained, evaluated, calibrated, and versioned; walk-forward backtest runs end-to-end. |
+| <a href="#ph-2">PH-2</a> | Train baseline probability + timing models | <a href="#f4">F-04 Sell GTT Target Prediction</a> | <a href="#s-a4">S-A4 Predict Sell GTT target timing</a> | <a href="#b-p0-modeling">P0 Modeling MVP</a> | Baseline models are trained, evaluated, calibrated, and versioned; walk-forward backtest runs end-to-end. |
+| <a href="#ph-2">PH-2</a> | Train baseline probability + timing models | <a href="#f6">F-06 Historical + Daily Data Pipeline</a> | <a href="#s-b3">S-B3 Backtesting before release</a> | <a href="#b-p0-modeling">P0 Modeling MVP</a> | Baseline models are trained, evaluated, calibrated, and versioned; walk-forward backtest runs end-to-end. |
+| <a href="#ph-2">PH-2</a> | Train baseline probability + timing models | <a href="#f7">F-07 Backtesting Dashboard</a> | <a href="#s-b3">S-B3 Backtesting before release</a> | <a href="#b-p0-modeling">P0 Modeling MVP</a> | Baseline models are trained, evaluated, calibrated, and versioned; walk-forward backtest runs end-to-end. |
+| <a href="#ph-3">PH-3</a> | Deliver MVP API + UI for prediction flow | <a href="#f1">F-01 Stock Selection</a> | <a href="#s-a1">S-A1 Select a stock</a> | <a href="#b-p0-api-ux">P0 API and UX MVP</a> | User can request and view Buy GTT + Sell GTT probability/timing with confidence and disclaimer. |
+| <a href="#ph-3">PH-3</a> | Deliver MVP API + UI for prediction flow | <a href="#f2">F-02 User Profit % Configuration</a> | <a href="#s-a2">S-A2 Set desired profit %</a> | <a href="#b-p0-api-ux">P0 API and UX MVP</a> | User can request and view Buy GTT + Sell GTT probability/timing with confidence and disclaimer. |
+| <a href="#ph-3">PH-3</a> | Deliver MVP API + UI for prediction flow | <a href="#f3">F-03 Buy GTT Suggestion</a> | <a href="#s-a3">S-A3 Get suggested Buy GTT</a> | <a href="#b-p0-api-ux">P0 API and UX MVP</a> | User can request and view Buy GTT + Sell GTT probability/timing with confidence and disclaimer. |
+| <a href="#ph-3">PH-3</a> | Deliver MVP API + UI for prediction flow | <a href="#f4">F-04 Sell GTT Target Prediction</a> | <a href="#s-a4">S-A4 Predict Sell GTT target timing</a> | <a href="#b-p0-api-ux">P0 API and UX MVP</a> | User can request and view Buy GTT + Sell GTT probability/timing with confidence and disclaimer. |
+| <a href="#ph-3">PH-3</a> | Deliver MVP API + UI for prediction flow | <a href="#f5">F-05 Explanation Layer</a> | <a href="#s-a5">S-A5 Understand prediction confidence</a> | <a href="#b-p0-api-ux">P0 API and UX MVP</a> | User can request and view Buy GTT + Sell GTT probability/timing with confidence and disclaimer. |
+| <a href="#ph-4">PH-4</a> | Add trust, backtesting, and observability for launch readiness | <a href="#f7">F-07 Backtesting Dashboard</a> | <a href="#s-b3">S-B3 Backtesting before release</a> | <a href="#b-p1-reliability">P1 Reliability and Observability</a> | Backtesting reporting, observability, and drift checks support launch readiness decisions. |
+| <a href="#ph-4">PH-4</a> | Add trust, backtesting, and observability for launch readiness | <a href="#f5">F-05 Explanation Layer</a> | <a href="#s-a5">S-A5 Understand prediction confidence</a> | <a href="#b-p1-reliability">P1 Reliability and Observability</a> | Backtesting reporting, observability, and drift checks support launch readiness decisions. |
+| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f8">F-08 Alerts and Notifications</a> | <a href="#s-c2">S-C2 Compare multiple profit % scenarios</a> | <a href="#b-p1-ux-enhancements">P1 User Experience Enhancements</a>, <a href="#b-p2-advanced">P2 Advanced Features</a> | Post-MVP features are shipped in prioritized releases with cost/usage controls. |
+| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f9">F-09 User Preferences</a> | <a href="#s-c1">S-C1 Save default profit %</a>, <a href="#s-c2">S-C2 Compare multiple profit % scenarios</a> | <a href="#b-p1-ux-enhancements">P1 User Experience Enhancements</a> | Post-MVP features are shipped in prioritized releases with cost/usage controls. |
+| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f10">F-10 Watchlist Predictions</a> | <a href="#s-c2">S-C2 Compare multiple profit % scenarios</a> | <a href="#b-p1-ux-enhancements">P1 User Experience Enhancements</a> | Post-MVP features are shipped in prioritized releases with cost/usage controls. |
+| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f11">F-11 Stop-loss and Risk/Reward Optimization</a> | <a href="#s-c2">S-C2 Compare multiple profit % scenarios</a> | <a href="#b-p2-advanced">P2 Advanced Features</a> | Post-MVP features are shipped in prioritized releases with cost/usage controls. |
+| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f12">F-12 Personalized Models</a> | <a href="#s-c1">S-C1 Save default profit %</a> | <a href="#b-p2-advanced">P2 Advanced Features</a> | Post-MVP features are shipped in prioritized releases with cost/usage controls. |
+| <a href="#ph-5">PH-5</a> | Expand to personalization, alerts, and advanced modeling | <a href="#f13">F-13 Event-aware Forecasting</a> | <a href="#s-c2">S-C2 Compare multiple profit % scenarios</a> | <a href="#b-p2-advanced">P2 Advanced Features</a> | Post-MVP features are shipped in prioritized releases with cost/usage controls. |
 
 ## Features
 
