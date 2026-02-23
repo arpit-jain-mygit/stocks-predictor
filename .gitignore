@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Data artifacts
+/data/raw/
+/data/processed/
+*.parquet
+*.feather
+*.csv
+
+# ML artifacts
+*.pkl
+*.joblib
+models/
+
+# Node / web
+node_modules/
+dist/
+build/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Env
+.env
+.env.*
