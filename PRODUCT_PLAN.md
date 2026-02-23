@@ -85,6 +85,13 @@ Potential expansions:
 
 This section links each roadmap phase to the features, stories, and backlog items required to deliver it.
 
+### Traceability Relationship Model
+
+- `Phase -> Feature` is generally many-to-many (a feature can span multiple phases).
+- `Feature -> Story` is generally one-to-many (one feature is delivered through multiple stories).
+- `Story -> Feature` is often many-to-one, but some stories can support multiple features.
+- Some rows currently appear `1:1` only because the initial story set is still small; this table should expand as more stories are added.
+
 | Phase | Parent Outcome | Features (linked) | Stories (linked) |
 |---|---|---|---|
 | Phase 0 (Week 1) | Lock MVP scope, prediction definitions, and stock universe | <a href="#f1">Stock Selection</a> | <a href="#s-a1">Select a stock</a> |
