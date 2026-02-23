@@ -85,14 +85,14 @@ Potential expansions:
 
 This section links each roadmap phase to the features, stories, and backlog items required to deliver it.
 
-| Phase | Parent Outcome | Stories (linked) |
-|---|---|---|
-| Phase 0 (Week 1) | Lock MVP scope, prediction definitions, and stock universe | <a href="#s-a1">Select a stock</a>, <a href="#s-a2">Set desired profit %</a>, <a href="#s-a3">Get suggested Buy GTT</a>, <a href="#s-a4">Predict Sell GTT target timing</a>, <a href="#s-a5">Understand prediction confidence</a> |
-| Phase 1 (Weeks 2-4) | Build reliable historical + daily data foundation | <a href="#s-b1">Daily market data refresh</a>, <a href="#s-b2">Historical backfill for supported stocks</a>, <a href="#s-a1">Select a stock</a> |
-| Phase 2 (Weeks 4-7) | Train baseline probability + timing models | <a href="#s-a3">Get suggested Buy GTT</a>, <a href="#s-a4">Predict Sell GTT target timing</a>, <a href="#s-b3">Backtesting before release</a> |
-| Phase 3 (Weeks 7-10) | Deliver MVP API + UI for prediction flow | <a href="#s-a1">Select a stock</a>, <a href="#s-a2">Set desired profit %</a>, <a href="#s-a3">Get suggested Buy GTT</a>, <a href="#s-a4">Predict Sell GTT target timing</a>, <a href="#s-a5">Understand prediction confidence</a> |
-| Phase 4 (Weeks 10-12) | Add trust, backtesting, and observability for launch readiness | <a href="#s-b3">Backtesting before release</a>, <a href="#s-a5">Understand prediction confidence</a> |
-| Phase 5 (Post-MVP) | Expand to personalization, alerts, and advanced modeling | <a href="#s-c1">Save default profit %</a>, <a href="#s-c2">Compare multiple profit % scenarios</a> |
+| Phase | Parent Outcome | Features (linked) | Stories (linked) |
+|---|---|---|---|
+| Phase 0 (Week 1) | Lock MVP scope, prediction definitions, and stock universe | <a href="#f1">Stock Selection</a>, <a href="#f2">User Profit % Configuration</a>, <a href="#f3">Buy GTT Suggestion</a>, <a href="#f4">Sell GTT Target Prediction</a>, <a href="#f5">Explanation Layer</a> | <a href="#s-a1">Select a stock</a>, <a href="#s-a2">Set desired profit %</a>, <a href="#s-a3">Get suggested Buy GTT</a>, <a href="#s-a4">Predict Sell GTT target timing</a>, <a href="#s-a5">Understand prediction confidence</a> |
+| Phase 1 (Weeks 2-4) | Build reliable historical + daily data foundation | <a href="#f6">Historical + Daily Data Pipeline</a>, <a href="#f1">Stock Selection</a> | <a href="#s-b1">Daily market data refresh</a>, <a href="#s-b2">Historical backfill for supported stocks</a>, <a href="#s-a1">Select a stock</a> |
+| Phase 2 (Weeks 4-7) | Train baseline probability + timing models | <a href="#f3">Buy GTT Suggestion</a>, <a href="#f4">Sell GTT Target Prediction</a>, <a href="#f6">Historical + Daily Data Pipeline</a>, <a href="#f7">Backtesting Dashboard</a> | <a href="#s-a3">Get suggested Buy GTT</a>, <a href="#s-a4">Predict Sell GTT target timing</a>, <a href="#s-b3">Backtesting before release</a> |
+| Phase 3 (Weeks 7-10) | Deliver MVP API + UI for prediction flow | <a href="#f1">Stock Selection</a>, <a href="#f2">User Profit % Configuration</a>, <a href="#f3">Buy GTT Suggestion</a>, <a href="#f4">Sell GTT Target Prediction</a>, <a href="#f5">Explanation Layer</a> | <a href="#s-a1">Select a stock</a>, <a href="#s-a2">Set desired profit %</a>, <a href="#s-a3">Get suggested Buy GTT</a>, <a href="#s-a4">Predict Sell GTT target timing</a>, <a href="#s-a5">Understand prediction confidence</a> |
+| Phase 4 (Weeks 10-12) | Add trust, backtesting, and observability for launch readiness | <a href="#f7">Backtesting Dashboard</a>, <a href="#f5">Explanation Layer</a> | <a href="#s-b3">Backtesting before release</a>, <a href="#s-a5">Understand prediction confidence</a> |
+| Phase 5 (Post-MVP) | Expand to personalization, alerts, and advanced modeling | <a href="#f8">Alerts and Notifications</a>, <a href="#f9">User Preferences</a>, <a href="#f10">Watchlist Predictions</a>, <a href="#f11">Stop-loss and Risk/Reward Optimization</a>, <a href="#f12">Personalized Models</a>, <a href="#f13">Event-aware Forecasting</a> | <a href="#s-c1">Save default profit %</a>, <a href="#s-c2">Compare multiple profit % scenarios</a> |
 
 ### Feature and Backlog Traceability (Support View)
 
