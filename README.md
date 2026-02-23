@@ -40,3 +40,4 @@ For a selected stock and user-configured `profit_pct`, show:
 - User-configurable profit % as a first-class model input
 - Explainability and risk disclosure in the UI
 - India market specific support (NSE/BSE symbols, holidays, trading sessions)
+# stocks-predictor
