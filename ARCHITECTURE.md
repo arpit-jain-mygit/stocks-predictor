@@ -22,7 +22,7 @@ Outputs:
 
 ## Unified System Integration + Data Flow Journey (with Personas)
 
-<img width="1536" height="1024" alt="ChatGPT Image Feb 24, 2026, 08_46_30 AM" src="https://github.com/user-attachments/assets/8fb304a2-f713-4de8-9669-314acf37a371" />
+<img width="1536" height="1024" alt="ChatGPT Image Feb 24, 2026, 09_26_22 AM" src="https://github.com/user-attachments/assets/ff9b1751-9081-42a1-9249-0114d8442206" />
 
 
 ## Diagram Notes (How to read it)
