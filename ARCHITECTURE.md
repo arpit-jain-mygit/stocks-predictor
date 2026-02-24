@@ -76,12 +76,41 @@ flowchart LR
   %% Optional future flows
   P2 -. "watchlist/scenario compare" .-> API
   API -. "alert windows" .-> DB
+
+  %% Visual grouping: node colors
+  classDef persona fill:#FFF3BF,stroke:#B08900,stroke-width:1.5px,color:#3D2C00;
+  classDef product fill:#DCEEFF,stroke:#1D4ED8,stroke-width:1.5px,color:#0B1F44;
+  classDef dataflow fill:#DCFCE7,stroke:#15803D,stroke-width:1.5px,color:#052E16;
+  classDef external fill:#FCE7F3,stroke:#BE185D,stroke-width:1.5px,color:#4A044E;
+  classDef ops fill:#F3E8FF,stroke:#7E22CE,stroke-width:1.5px,color:#3B0764;
+
+  class P1,P2,P3 persona;
+  class UI,API product;
+  class INFER,FEATURES,TRAIN,DATAING dataflow;
+  class SCHED,MON ops;
+  class CACHE,VERTEX,DB,OBJ,MARKET external;
+
+  %% Visual grouping: link colors
+  %% Persona interaction links (0-2)
+  linkStyle 0,1,2 stroke:#B08900,stroke-width:2px;
+  %% Runtime request/response and inference flow (3-13)
+  linkStyle 3,4,5,6,7,8,9,10,11,12,13 stroke:#1D4ED8,stroke-width:2px;
+  %% Offline data + training + monitoring flow (14-23)
+  linkStyle 14,15,16,17,18,19,20,21,22,23 stroke:#15803D,stroke-width:2px;
+  %% Future optional flows (24-25)
+  linkStyle 24,25 stroke:#7E22CE,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 ## Diagram Notes (How to read it)
 
 - Runtime user journey is left-to-right across `UI -> API -> Inference/Vertex -> UI`.
 - Offline data and model lifecycle is lower flow: `Market Data -> Data Ingestion -> Features -> Train/Backtest -> Artifacts/Monitoring`.
+- Colors:
+  - Yellow = User personas
+  - Blue = Product/feature-delivery components (`web`, `api`)
+  - Green = Data/ML flow components
+  - Pink = External systems / managed services / upstream providers
+  - Purple = Ops/monitoring components and future-flow edges
 - Each component node is annotated with:
   - `Phases` (`PH-*`)
   - `Features` (`F-*`)
