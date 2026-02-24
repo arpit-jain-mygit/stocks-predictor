@@ -136,6 +136,46 @@ This section links each roadmap phase to the features, stories, and backlog item
 - Support initial universe (e.g., NIFTY 50 / curated list)
 - Display latest close and recent trend summary
 
+Phase 0 focus (definition/spec only):
+- Finalize the supported stock universe for MVP (`NIFTY 50` vs curated liquid list).
+- Define symbol identity rules (primary exchange, display format, canonical symbol key).
+- Define search UX expectations (symbol-first, name search, partial matches).
+- Define minimum stock snapshot fields required for MVP prediction entry.
+
+Story linkage:
+- Primary: <a href="#s-a1">S-A1 Select a stock</a>
+
+Backlog linkage:
+- Phase 0 planning: `STK-001`
+- Phase 1 data dependencies: `STK-006`
+- Phase 3 implementation dependencies: `STK-023`
+
+Phase 0 decisions required:
+- Universe scope: `NIFTY 50 only` or `curated liquid stocks`
+- Exchange strategy: `NSE only` in MVP or `NSE + BSE` with conflict handling
+- Canonical symbol format (example: `RELIANCE.NS`)
+- Unsupported stock behavior (hide vs show with unsupported state)
+
+Minimum MVP stock selection contract (draft):
+- `symbol` (canonical)
+- `display_symbol`
+- `company_name`
+- `exchange`
+- `is_supported`
+- `latest_close` (nullable if unavailable)
+- `as_of_date` (latest market date)
+
+Phase 0 acceptance criteria (feature-level):
+- MVP stock universe decision is documented and approved.
+- Canonical symbol format and exchange rules are documented.
+- Search and selection response shape is documented for UI/API alignment.
+- Dependencies on data pipeline freshness are explicitly documented.
+
+Out of scope for Phase 0:
+- Production search API implementation
+- Live autocomplete optimization
+- Watchlist and batch-selection UX
+
 <a id="f2"></a>
 ### Feature F-02: User Profit % Configuration
 - User enters desired profit percentage per transaction
